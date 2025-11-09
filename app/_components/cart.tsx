@@ -36,20 +36,34 @@ export const Cart = () => {
           <div className="flex h-full max-h-full flex-col overflow-hidden">
             <ScrollArea className="h-full">
               <div className="flex h-full flex-col gap-8">
-                {cart?.items.map((item) => (
-                  <CartItem
-                    key={item.id}
-                    id={item.id}
-                    productVariantId={item.productVariant.id}
-                    productName={item.productVariant.product.name}
-                    productVariantName={item.productVariant.name}
-                    productVariantImageUrl={item.productVariant.imageUrl}
-                    productVariantPriceInCents={
-                      item.productVariant.priceInCents
-                    }
-                    quantity={item.quantity}
-                  />
-                ))}
+                {cart?.items && cart.items.length > 0 ? (
+                  cart.items.map((item) => (
+                    <CartItem
+                      key={item.id}
+                      id={item.id}
+                      productVariantId={item.productVariant.id}
+                      productName={item.productVariant.product.name}
+                      productVariantName={item.productVariant.name}
+                      productVariantImageUrl={item.productVariant.imageUrl}
+                      productVariantPriceInCents={
+                        item.productVariant.priceInCents
+                      }
+                      quantity={item.quantity}
+                    />
+                  ))
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
+                    <ShoppingBasketIcon className="text-muted-foreground/50 h-16 w-16" />
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold">
+                        Seu carrinho está vazio
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        Adicione produtos para começar suas compras
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </ScrollArea>
           </div>
