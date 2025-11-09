@@ -14,13 +14,20 @@ import {
   DialogTitle,
 } from "@/app/_components/ui/dialog";
 import { useFinishOrder } from "@/app/_hooks/mutations/use-finish-order";
+import { createCheckoutSession } from "@/app/_actions/create-checkout-session";
 
 const FinishOrderButton = () => {
   const [successDialogIsOpen, setSuccessDialogIsOpen] = useState(false);
   const finishOrderMutation = useFinishOrder();
-  const handleFinishOrder = () => {
-    finishOrderMutation.mutate();
-    setSuccessDialogIsOpen(true);
+  const handleFinishOrder = async () => {
+    const { orderId } = await finishOrderMutation.mutateAsync();
+    const checkoutSession = await createCheckoutSession({ orderId });
+
+    if (checkoutSession.url) {
+      window.location.href = checkoutSession.url;
+    } else {
+      throw new Error("URL do checkout não foi retornada.");
+    }
   };
   return (
     <>
