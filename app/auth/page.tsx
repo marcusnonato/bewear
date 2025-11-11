@@ -12,13 +12,17 @@ import SignUpForm from "./_components/sign-up-form";
 const Authentication = async () => {
   return (
     <>
-      <Header />
+      <Header logoOnly />
 
-      <div className="flex w-full flex-col gap-6 p-5">
-        <Tabs defaultValue="sign-in">
-          <TabsList>
-            <TabsTrigger value="sign-in">Entrar</TabsTrigger>
-            <TabsTrigger value="sign-up">Criar conta</TabsTrigger>
+      <div className="flex w-full flex-col items-center gap-6 p-5">
+        <Tabs defaultValue="sign-in" className="w-full max-w-md">
+          <TabsList className="w-full">
+            <TabsTrigger value="sign-in" className="w-full">
+              Entrar
+            </TabsTrigger>
+            <TabsTrigger value="sign-up" className="w-full">
+              Criar conta
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="sign-in" className="w-full">
             <SignInForm />

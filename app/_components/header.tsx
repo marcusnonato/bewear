@@ -17,14 +17,28 @@ import {
 } from "./ui/sheet";
 import { Cart } from "./cart";
 
-export const Header = () => {
+interface HeaderProps {
+  logoOnly?: boolean;
+}
+
+export const Header = ({ logoOnly = false }: HeaderProps) => {
   const { data: session } = authClient.useSession();
+
+  if (logoOnly) {
+    return (
+      <header className="flex items-center justify-center p-5">
+        <Link href="/">
+          <Image src="/logo.svg" alt="BEWEAR" width={100} height={26.14} />
+        </Link>
+      </header>
+    );
+  }
+
   return (
     <header className="flex items-center justify-between p-5">
       <Link href="/">
         <Image src="/logo.svg" alt="BEWEAR" width={100} height={26.14} />
       </Link>
-
       <div className="flex items-center gap-3">
         <Sheet>
           <SheetTrigger asChild>
