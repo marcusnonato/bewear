@@ -14,11 +14,10 @@ const brands = [
 export function PartnerBands() {
   return (
     <div>
-      <h2 className="mb-8 px-5 font-semibold md:px-11 md:text-2xl">
+      <h2 className="mb-8 px-5 font-semibold md:px-11 md:text-xl">
         Marcas parceiras
       </h2>
 
-      {/* Carousel para telas menores que xl */}
       <div className="xl:hidden">
         <Carousel
           opts={{
@@ -43,7 +42,6 @@ export function PartnerBands() {
         </Carousel>
       </div>
 
-      {/* Flex layout para telas xl e maiores */}
       <div className="hidden px-11 xl:flex xl:items-center xl:justify-between">
         {brands.map((brand) => (
           <div className="flex flex-col items-center gap-4">

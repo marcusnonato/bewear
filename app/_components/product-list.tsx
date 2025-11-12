@@ -15,7 +15,7 @@ interface ProductListProps {
 const ProductList = ({ title, products }: ProductListProps) => {
   return (
     <div className="space-y-6">
-      <h3 className="px-5 font-semibold md:px-11 md:text-2xl">{title}</h3>
+      <h3 className="px-5 font-semibold md:px-11 md:text-xl">{title}</h3>
       <Carousel
         opts={{
           align: "start",

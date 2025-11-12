@@ -76,7 +76,7 @@ export default async function Home() {
         </div>
         <div className="mt-32 hidden px-11 md:block">
           <Image
-            src={"/banner-desktop-01.png"}
+            src={"/banner-desktop-02.png"}
             alt="Leve uma vida com estilo"
             height={0}
             width={0}

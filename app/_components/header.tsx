@@ -92,9 +92,7 @@ export const Header = ({ logoOnly = false }: HeaderProps) => {
         <Image src="/logo.svg" alt="BEWEAR" width={100} height={26.14} />
       </Link>
       <div className="hidden md:flex">
-        <Button variant="outline" className="cursor-pointer" size="icon">
-          <ShoppingCartIcon />
-        </Button>
+        <Cart />
         {session?.user.id && (
           <Button
             variant="outline"

@@ -40,45 +40,56 @@ const ProductVariantPage = async ({ params }: ProductVariantPageProps) => {
   return (
     <>
       <Header />
-      <div className="flex flex-col space-y-6">
-        <Image
-          src={productVariant.imageUrl}
-          alt={productVariant.name}
-          sizes="100vw"
-          height={0}
-          width={0}
-          className="h-auto w-full object-cover"
-        />
 
-        <div className="px-5">
-          <VariantSelector
-            selectedVariantSlug={productVariant.slug}
-            variants={productVariant.product.variants}
+      <div className="flex flex-col space-y-6">
+        <div className="grid grid-cols-1 gap-6 px-5 md:mt-12 md:px-11 lg:grid-cols-2">
+          <div className="lg:sticky lg:top-6 lg:h-fit">
+            <Image
+              src={productVariant.imageUrl}
+              alt={productVariant.name}
+              sizes="100vw"
+              height={0}
+              width={0}
+              className="h-auto w-full object-cover lg:mx-auto lg:max-h-[700px] lg:w-auto lg:max-w-[700px] lg:rounded-2xl"
+            />
+          </div>
+
+          <div className="flex flex-col space-y-6">
+            <div className="px-5 lg:px-0">
+              <h2 className="text-lg font-semibold md:text-3xl">
+                {productVariant.product.name}
+              </h2>
+              <h3 className="text-muted-foreground text-sm md:text-base">
+                {productVariant.name}
+              </h3>
+              <h3 className="text-lg font-semibold md:text-xl">
+                {formatCentsToBRL(productVariant.priceInCents)}
+              </h3>
+            </div>
+
+            <div className="px-5 lg:px-0">
+              <VariantSelector
+                selectedVariantSlug={productVariant.slug}
+                variants={productVariant.product.variants}
+              />
+            </div>
+
+            <ProductActions productVariantId={productVariant.id} />
+
+            <div className="px-5 lg:px-0">
+              <p className="text-shadow-amber-600">
+                {productVariant.product.description}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="md:mt-14">
+          <ProductList
+            title="Você também pode gostar"
+            products={likelyProducts}
           />
         </div>
-
-        <div className="px-5">
-          {/* DESCRIÇÃO */}
-          <h2 className="text-lg font-semibold">
-            {productVariant.product.name}
-          </h2>
-          <h3 className="text-muted-foreground text-sm">
-            {productVariant.name}
-          </h3>
-          <h3 className="text-lg font-semibold">
-            {formatCentsToBRL(productVariant.priceInCents)}
-          </h3>
-        </div>
-
-        <ProductActions productVariantId={productVariant.id} />
-
-        <div className="px-5">
-          <p className="text-shadow-amber-600">
-            {productVariant.product.description}
-          </p>
-        </div>
-
-        <ProductList title="Talvez você goste" products={likelyProducts} />
 
         <Footer />
       </div>

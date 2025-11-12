@@ -8,7 +8,6 @@ import { PatternFormat } from "react-number-format";
 import { toast } from "sonner";
 import z from "zod";
 
-import { getCart } from "@/app/_actions/get-cart";
 import { Button } from "@/app/_components/ui/button";
 import {
   Card,
@@ -120,19 +119,20 @@ const Addresses = ({
   };
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="border-none shadow-none lg:border lg:shadow-sm">
+      <CardHeader className="px-0 lg:px-6">
         <CardTitle>Identificação</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-3 px-0 lg:px-6">
         {isLoading ? (
           <div className="py-4 text-center">
-            <p>Carregando endereços...</p>
+            <p className="text-muted-foreground">Carregando endereços...</p>
           </div>
         ) : (
           <RadioGroup
             value={selectedAddress}
             onValueChange={setSelectedAddress}
+            className="space-y-2"
           >
             {addresses?.length === 0 && (
               <div className="py-4 text-center">
@@ -143,15 +143,20 @@ const Addresses = ({
             )}
 
             {addresses?.map((address) => (
-              <Card key={address.id}>
-                <CardContent>
-                  <div className="flex items-start space-x-2">
-                    <RadioGroupItem value={address.id} id={address.id} />
+              <Card
+                key={address.id}
+                className="hover:border-primary/50 transition-colors"
+              >
+                <CardContent className="p-3 lg:p-4">
+                  <div className="flex items-start space-x-3">
+                    <RadioGroupItem
+                      value={address.id}
+                      id={address.id}
+                      className="mt-0.5"
+                    />
                     <div className="flex-1">
                       <Label htmlFor={address.id} className="cursor-pointer">
-                        <div>
-                          <p className="text-sm">{formatAddress(address)}</p>
-                        </div>
+                        <p className="text-sm">{formatAddress(address)}</p>
                       </Label>
                     </div>
                   </div>
@@ -159,11 +164,13 @@ const Addresses = ({
               </Card>
             ))}
 
-            <Card>
-              <CardContent>
-                <div className="flex items-center space-x-2">
+            <Card className="hover:border-primary/50 transition-colors">
+              <CardContent className="p-3 lg:p-4">
+                <div className="flex items-center space-x-3">
                   <RadioGroupItem value="add_new" id="add_new" />
-                  <Label htmlFor="add_new">Adicionar novo endereço</Label>
+                  <Label htmlFor="add_new" className="cursor-pointer text-sm">
+                    Adicionar novo endereço
+                  </Label>
                 </div>
               </CardContent>
             </Card>
@@ -171,10 +178,11 @@ const Addresses = ({
         )}
 
         {selectedAddress && selectedAddress !== "add_new" && (
-          <div className="mt-4">
+          <div className="pt-2">
             <Button
               onClick={handleGoToPayment}
-              className="w-full"
+              className="w-full rounded-full"
+              size="lg"
               disabled={updateCartShippingAddressMutation.isPending}
             >
               {updateCartShippingAddressMutation.isPending
@@ -188,9 +196,9 @@ const Addresses = ({
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="mt-4 space-y-4"
+              className="space-y-4 pt-2"
             >
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <FormField
                   control={form.control}
                   name="email"
@@ -369,7 +377,8 @@ const Addresses = ({
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full rounded-full"
+                size="lg"
                 disabled={
                   createShippingAddressMutation.isPending ||
                   updateCartShippingAddressMutation.isPending

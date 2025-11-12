@@ -23,7 +23,16 @@ export const Cart = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button
+          variant="outline"
+          className="relative cursor-pointer"
+          size="icon"
+        >
+          {cart && cart.items.length > 0 && (
+            <span className="bg-primary absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-xs font-medium text-white">
+              {cart.items.reduce((acc, item) => acc + item.quantity, 0)}
+            </span>
+          )}
           <ShoppingBasketIcon />
         </Button>
       </SheetTrigger>
