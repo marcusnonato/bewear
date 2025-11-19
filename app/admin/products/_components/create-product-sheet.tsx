@@ -73,7 +73,7 @@ export function CreateProductSheet({ categories }: CreateProductSheetProps) {
             Crie um novo produto para sua loja.
           </SheetDescription>
         </SheetHeader>
-        <form action={formAction} className="space-y-4 py-4">
+        <form action={formAction} className="space-y-4 px-4 py-4">
           <div className="space-y-2">
             <Label htmlFor="name">Nome</Label>
             <Input
