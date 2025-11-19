@@ -36,12 +36,12 @@ export function OrderList({ orders }: OrderListProps) {
         <AccordionItem
           value={order.id}
           key={order.id}
-          className="rounded-lg border bg-card px-4"
+          className="bg-card rounded-lg border px-4"
         >
           <AccordionTrigger className="hover:no-underline">
             <div className="grid w-full grid-cols-2 gap-4 text-left md:grid-cols-4">
               <div className="flex flex-col gap-1">
-                <span className="text-xs font-semibold uppercase text-muted-foreground">
+                <span className="text-muted-foreground text-xs font-semibold uppercase">
                   Número do Pedido
                 </span>
                 <span className="text-sm font-medium">
@@ -50,7 +50,7 @@ export function OrderList({ orders }: OrderListProps) {
               </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-xs font-semibold uppercase text-muted-foreground">
+                <span className="text-muted-foreground text-xs font-semibold uppercase">
                   Status
                 </span>
                 <Badge
@@ -68,16 +68,16 @@ export function OrderList({ orders }: OrderListProps) {
               </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-xs font-semibold uppercase text-muted-foreground">
+                <span className="text-muted-foreground text-xs font-semibold uppercase">
                   Data
                 </span>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   {new Date(order.createdAt).toLocaleDateString("pt-BR")}
                 </span>
               </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-xs font-semibold uppercase text-muted-foreground">
+                <span className="text-muted-foreground text-xs font-semibold uppercase">
                   Total
                 </span>
                 <span className="text-sm font-medium">
@@ -105,7 +105,7 @@ export function OrderList({ orders }: OrderListProps) {
                       <span className="font-medium">
                         {item.productVariant.product.name}
                       </span>
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-muted-foreground text-sm">
                         Quantidade: {item.quantity}
                       </span>
                     </div>
@@ -120,15 +120,15 @@ export function OrderList({ orders }: OrderListProps) {
 
               {/* Summary */}
               <div className="space-y-2 text-sm">
-                <div className="flex justify-between text-muted-foreground">
+                <div className="text-muted-foreground flex justify-between">
                   <span>Subtotal</span>
                   <span>{formatCentsToBRL(order.totalPriceInCents)}</span>
                 </div>
-                <div className="flex justify-between text-muted-foreground">
+                <div className="text-muted-foreground flex justify-between">
                   <span>Entrega</span>
                   <span>GRÁTIS</span>
                 </div>
-                <div className="flex justify-between text-muted-foreground">
+                <div className="text-muted-foreground flex justify-between">
                   <span>Descontos</span>
                   <span>- R$ 0,00</span>
                 </div>

@@ -5,8 +5,27 @@ import {
   CardTitle,
 } from "@/app/_components/ui/card";
 import { DollarSign, ShoppingBag, Users } from "lucide-react";
+import { db } from "@/app/_db";
+import { orderTable, productTable } from "@/app/_db/schema";
+import { count, eq, sum } from "drizzle-orm";
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
+  const [productsCount] = await db
+    .select({ count: count() })
+    .from(productTable);
+
+  const [ordersStats] = await db
+    .select({
+      totalRevenue: sum(orderTable.totalPriceInCents),
+      totalSales: count(),
+    })
+    .from(orderTable)
+    .where(eq(orderTable.status, "paid"));
+
+  const totalRevenue = Number(ordersStats?.totalRevenue || 0) / 100;
+  const totalSales = Number(ordersStats?.totalSales || 0);
+  const activeProducts = Number(productsCount?.count || 0);
+
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -18,9 +37,14 @@ export default function AdminDashboardPage() {
             <DollarSign className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">R$ 0,00</div>
+            <div className="text-2xl font-bold">
+              {new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(totalRevenue)}
+            </div>
             <p className="text-muted-foreground text-xs">
-              +0% em relação ao mês passado
+              Receita total de pedidos pagos
             </p>
           </CardContent>
         </Card>
@@ -30,9 +54,9 @@ export default function AdminDashboardPage() {
             <ShoppingBag className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+0</div>
+            <div className="text-2xl font-bold">{totalSales}</div>
             <p className="text-muted-foreground text-xs">
-              +0% em relação ao mês passado
+              Total de pedidos pagos
             </p>
           </CardContent>
         </Card>
@@ -44,9 +68,9 @@ export default function AdminDashboardPage() {
             <Users className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+0</div>
+            <div className="text-2xl font-bold">{activeProducts}</div>
             <p className="text-muted-foreground text-xs">
-              +0 desde a última hora
+              Total de produtos cadastrados
             </p>
           </CardContent>
         </Card>

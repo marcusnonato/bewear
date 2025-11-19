@@ -49,7 +49,7 @@ export function AdminSidebar() {
         alt="BEWARE"
       />
       <div className="flex-1 overflow-y-auto py-4 pt-10">
-        <nav className="grid gap-1 px-2">
+        <nav className="grid gap-3 px-2">
           {sidebarItems.map((item) => {
             const isActive = pathname === item.href;
             return (
