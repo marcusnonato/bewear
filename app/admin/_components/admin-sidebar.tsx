@@ -41,13 +41,15 @@ export function AdminSidebar() {
 
   return (
     <div className="bg-background flex h-full w-64 flex-col border-r">
-      <Image
-        width={130}
-        height={33}
-        className="mx-4 mt-4 object-contain"
-        src={"/logo.svg"}
-        alt="BEWARE"
-      />
+      <Link href={"/"}>
+        <Image
+          width={130}
+          height={33}
+          className="mx-4 mt-4 object-contain"
+          src={"/logo.svg"}
+          alt="BEWARE"
+        />
+      </Link>
       <div className="flex-1 overflow-y-auto py-4 pt-10">
         <nav className="grid gap-3 px-2">
           {sidebarItems.map((item) => {

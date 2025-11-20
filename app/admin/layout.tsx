@@ -12,12 +12,6 @@ export default async function AdminLayout({
     headers: await headers(),
   });
 
-  console.log("Admin Layout Session Check:", {
-    hasSession: !!session,
-    userRole: session?.user ? (session.user as any).role : "undefined",
-    userId: session?.user?.id,
-  });
-
   if (!session || (session.user as any).role !== "admin") {
     redirect("/");
   }
