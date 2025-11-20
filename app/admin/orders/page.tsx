@@ -30,7 +30,7 @@ export default async function OrdersPage() {
         {orders.length > 0 ? (
           <OrderList orders={orders} />
         ) : (
-          <div className="flex h-24 items-center justify-center rounded-md border text-muted-foreground">
+          <div className="text-muted-foreground flex h-24 items-center justify-center rounded-md border">
             Nenhum pedido encontrado.
           </div>
         )}
